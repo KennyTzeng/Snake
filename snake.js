@@ -6,6 +6,20 @@ function snake(){
 	this.total = 0;
 	this.tail = [];
 
+	this.dir = function(x,y){
+		this.xspeed = x;
+		this.yspeed = y;
+	}
+
+	this.initStatus = function(){
+		this.total = 0;
+		this.tail = [];
+		this.x = 0;
+		this.y = 0;
+		this.xspeed = 1;
+		this.yspeed = 0;
+	}
+
 	this.eat = function(pos){
 		var d = dist(this.x, this.y, pos.x, pos.y);
 		if(d < 1){
@@ -16,20 +30,20 @@ function snake(){
 		}
 	}
 
-	this.dir = function(x,y){
-		this.xspeed = x;
-		this.yspeed = y;
-	}
-
 	this.death = function(){
+		if(this.x>=width || this.x<0 || this.y>=height || this.y<0){
+			alert("GAME OVER");
+			this.initStatus();
+			return;
+		}
+
 		for(var i=0;i<this.tail.length;i++){
 			var pos = this.tail[i];
 			var d = dist(this.x, this.y, pos.x, pos.y);
 
 			if(d<1){
 				alert("GAME OVER");
-				this.total = 0;
-				this.tail = [];
+				this.initStatus();
 			}
 		}
 	}
@@ -41,12 +55,9 @@ function snake(){
 			}
 		}
 		this.tail[this.total - 1] = createVector(this.x, this.y);
-		console.log(this.tail[this.total - 1].x);
+
 		this.x = this.x + this.xspeed * scl;
 		this.y = this.y + this.yspeed * scl;
-
-		this.x = constrain(this.x, 0, width);
-		this.y = constrain(this.y, 0, height); 
 	}
 
 	this.show = function(){
