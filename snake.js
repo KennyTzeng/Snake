@@ -32,7 +32,7 @@ function snake(){
 
 	this.death = function(){
 		if(this.x>=width || this.x<0 || this.y>=height || this.y<0){
-			alert("GAME OVER");
+			alert("GAME OVER !!!\nYour score is " + this.total + ".");
 			this.initStatus();
 			return;
 		}
@@ -42,7 +42,7 @@ function snake(){
 			var d = dist(this.x, this.y, pos.x, pos.y);
 
 			if(d<1){
-				alert("GAME OVER");
+				alert("GAME OVER !!!\nYour score is " + this.total + ".");
 				this.initStatus();
 			}
 		}
@@ -58,6 +58,8 @@ function snake(){
 
 		this.x = this.x + this.xspeed * scl;
 		this.y = this.y + this.yspeed * scl;
+
+		document.getElementById("score").innerHTML = s.total;
 	}
 
 	this.show = function(){

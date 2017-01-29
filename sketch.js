@@ -28,6 +28,7 @@ function draw(){
 	background(50);
 	if(s.eat(food)){
 		pickLocation();
+		document.getElementById("score").innerHTML = s.total;
 	}
 	s.death();
 	s.update();
